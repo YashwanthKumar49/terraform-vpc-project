@@ -1,9 +1,3 @@
-# ============================================================
-# terraform.tfvars
-# Actual values for all declared variables.
-# Do NOT commit this file to version control if it contains
-# sensitive values (add it to .gitignore).
-# ============================================================
 
 aws_region    = "ap-south-1"
 vpc_cidr      = "192.168.0.0/16"
@@ -13,6 +7,6 @@ az1           = "ap-south-1a"
 az2           = "ap-south-1b"
 ami_id        = "ami-02b8269d5e85954ef"
 instance_type = "t3.micro"
-s3_bucket_name = "terraform-s3-test-reya-project"
+s3_bucket_name = "terraform-s3-project-test-demo-project"
 alb_name      = "myalb"
 tg_name       = "myTG"
