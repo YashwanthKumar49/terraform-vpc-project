@@ -1,7 +1,4 @@
-# ============================================================
-# outputs.tf
-# Exposes useful resource attributes after apply.
-# ============================================================
+
 
 output "alb_dns_name" {
   description = "Public DNS name of the Application Load Balancer — use this URL to access the app"
