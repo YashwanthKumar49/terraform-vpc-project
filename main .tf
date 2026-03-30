@@ -1,20 +1,8 @@
-# ============================================================
-# main.tf
-# All infrastructure resources in logical dependency order:
-#   1. VPC
-#   2. Subnets
-#   3. Internet Gateway
-#   4. Route Table + Associations
-#   5. Security Group
-#   6. S3 Bucket
-#   7. EC2 Instances
-#   8. ALB + Target Group + Attachments + Listener
-# ============================================================
 
 
-# -----------------------------------------------------------
+
 # 1. VPC
-# -----------------------------------------------------------
+
 resource "aws_vpc" "myvpc" {
   cidr_block = var.vpc_cidr
 
@@ -24,9 +12,9 @@ resource "aws_vpc" "myvpc" {
 }
 
 
-# -----------------------------------------------------------
+
 # 2. Subnets
-# -----------------------------------------------------------
+
 resource "aws_subnet" "sub1" {
   vpc_id                  = aws_vpc.myvpc.id
   cidr_block              = var.subnet1_cidr
@@ -50,9 +38,8 @@ resource "aws_subnet" "sub2" {
 }
 
 
-# -----------------------------------------------------------
+
 # 3. Internet Gateway
-# -----------------------------------------------------------
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.myvpc.id
 
@@ -62,9 +49,9 @@ resource "aws_internet_gateway" "igw" {
 }
 
 
-# -----------------------------------------------------------
+
 # 4. Route Table & Subnet Associations
-# -----------------------------------------------------------
+
 resource "aws_route_table" "RT" {
   vpc_id = aws_vpc.myvpc.id
 
@@ -89,9 +76,9 @@ resource "aws_route_table_association" "rta2" {
 }
 
 
-# -----------------------------------------------------------
+
 # 5. Security Group (HTTP + SSH inbound, all outbound)
-# -----------------------------------------------------------
+
 resource "aws_security_group" "webSg" {
   name        = "web-sg"
   description = "Allow HTTP and SSH inbound traffic"
@@ -127,9 +114,9 @@ resource "aws_security_group" "webSg" {
 }
 
 
-# -----------------------------------------------------------
+
 # 6. S3 Bucket (for project assets)
-# -----------------------------------------------------------
+
 resource "aws_s3_bucket" "example" {
   bucket = var.s3_bucket_name
 
@@ -139,9 +126,9 @@ resource "aws_s3_bucket" "example" {
 }
 
 
-# -----------------------------------------------------------
+
 # 7. EC2 Instances (one per subnet / AZ)
-# -----------------------------------------------------------
+
 resource "aws_instance" "webserver1" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
@@ -167,9 +154,9 @@ resource "aws_instance" "webserver2" {
 }
 
 
-# -----------------------------------------------------------
+
 # 8. Application Load Balancer
-# -----------------------------------------------------------
+
 resource "aws_lb" "myalb" {
   name               = var.alb_name
   internal           = false
