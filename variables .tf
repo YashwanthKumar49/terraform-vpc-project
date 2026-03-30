@@ -1,8 +1,4 @@
-# ============================================================
-# variables.tf
-# Declares ALL input variables used across the project.
-# Default values act as fallbacks; tfvars takes precedence.
-# ============================================================
+
 
 variable "aws_region" {
   description = "AWS region where all resources will be deployed"
@@ -55,7 +51,7 @@ variable "instance_type" {
 variable "s3_bucket_name" {
   description = "Name of the S3 bucket for the project assets"
   type        = string
-  default     = "terraform-s3-test-reya-project"
+  default     = "terraform-project-s3-test-demo-project"
 }
 
 variable "alb_name" {
